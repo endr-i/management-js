@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: "postgres:16.2-alpine"
+    restart: "always"
+    environment:
+      #      - PGPORT=5433
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
