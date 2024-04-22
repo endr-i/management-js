@@ -1,19 +1,20 @@
-import axios, { AxiosRequestConfig, AxiosResponse, Canceler } from "axios";
-import { injectable } from "inversify";
+import axios, { AxiosRequestConfig, AxiosResponse, Canceler } from 'axios';
 
-@injectable()
+
 export class HttpService {
 
   protected readonly instance = axios.create({ baseURL: this.baseUrl });
 
   constructor(
-    protected   readonly baseUrl: string = '',
+    protected readonly baseUrl: string = '',
+    protected readonly defaultHeaders: { [key: string]: string } = {},
   ) {
   }
 
-  protected get defaultHeaders() {
+  protected get _defaultHeaders() {
     // TODO: auth headers
     return {
+      ...this.defaultHeaders,
       'Content-Type': 'application/json',
     };
   }
@@ -24,7 +25,7 @@ export class HttpService {
     data?: T,
     headers: { [key: string]: string } = {},
   ): Promise<{ request: Promise<AxiosResponse<R>>, cancel: Canceler }> {
-    const requestHeaders = { ...this.defaultHeaders, ...headers };
+    const requestHeaders = { ...this._defaultHeaders, ...headers };
     const source = axios.CancelToken.source();
 
     const config: AxiosRequestConfig<T> = {

@@ -1,6 +1,6 @@
 import { config as dotenvConfig } from 'dotenv';
-import { registerAs } from "@nestjs/config";
-import { DataSource, DataSourceOptions } from "typeorm";
+import { registerAs } from '@nestjs/config';
+import { DataSource, DataSourceOptions } from 'typeorm';
 
 dotenvConfig({ path: '.env' });
 
@@ -11,8 +11,8 @@ const config: DataSourceOptions = {
   username: `${process.env.DATABASE_USERNAME}`,
   password: `${process.env.DATABASE_PASSWORD}`,
   database: `${process.env.DATABASE_NAME}`,
-  entities: ["dist/**/*.entity{.ts,.js}"],
-  migrations: ["dist/migration/*{.ts,.js}"],
+  entities: ['dist/**/*.entity{.ts,.js}'],
+  migrations: ['dist/migration/*{.ts,.js}'],
   synchronize: false,
 };
 
