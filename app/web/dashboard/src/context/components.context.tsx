@@ -4,7 +4,7 @@ import React, { createContext, lazy, useContext, useMemo } from 'react';
 export type Components = Record<string, React.FC>;
 
 const defaultComponents: Components = {
-  user: lazy(() => import('../component/user/user-list.component')),
+  user: lazy(() => import('../component/user/user-list')),
 };
 
 const noComponents: Components = {};

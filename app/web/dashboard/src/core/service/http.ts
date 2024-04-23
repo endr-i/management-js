@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Canceler } from 'axios';
 
 
-export class HttpService {
+export class Http {
 
   protected readonly instance = axios.create({ baseURL: this.baseUrl });
 

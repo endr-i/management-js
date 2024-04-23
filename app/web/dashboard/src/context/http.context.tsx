@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
-import { HttpService } from '../lib/service/http.service';
+import { Http } from '../core/service/http';
 
-const http = new HttpService();
+const http = new Http();
 const httpContext = createContext(http);
 const HttpProvider = httpContext.Provider;
 

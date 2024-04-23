@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import UserListComponent from "../../component/user/user-list.component";
+import User from '../../root/user/user';
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <UserListComponent />,
+    element: <User />,
   },
 ]);
