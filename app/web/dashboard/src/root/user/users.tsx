@@ -1,10 +1,10 @@
 import React from 'react';
 import UserList from '../../component/user/user-list';
 
-const User: React.FC = () => {
+const Users: React.FC = () => {
   return (
-    <UserList></UserList>
+    <UserList />
   );
 }
 
-export default User;
+export default Users;

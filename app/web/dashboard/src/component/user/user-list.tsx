@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHttp } from '../../context/http.context';
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
 export type User = {
@@ -15,6 +16,7 @@ function UserList() {
 
   const [users, setUsers] = React.useState<User[]>([]);
   const http = useHttp();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     getUsers().then((res) => {
@@ -67,7 +69,7 @@ function UserList() {
   }
 
   const editUser = (id: string) => {
-
+    navigate(`./${id}`);
   };
 
   return (
@@ -96,7 +98,7 @@ function UserList() {
                 <TableCell align="center">
                   <div className="flex justify-around align-middle">
                     <Button onClick={() => deleteUser(user.id)}>Delete</Button>
-                    <Button onClick={() => editUser(user.id)}>Update</Button>
+                    <Button onClick={() => editUser(user.id)}>Edit</Button>
                   </div>
                 </TableCell>
               </TableRow>
