@@ -24,15 +24,23 @@ function UserList() {
     });
   }, []);
 
-  const createUser = React.useCallback(async (user: Partial<User>) => {
+  const deleteUser = React.useCallback(async (id: string) => {
     try {
-      const { request } = await http.post<User>('/api/user', user);
-      const newUser = (await request).data
-      setUsers([...users, newUser]);
+      await http.delete<User>(`/api/user/${id}`);
+
+      setUsers(users.filter(user => user.id !== id));
     } catch (e) {
       console.error(e);
     }
   }, [users]);
+
+  const createUser = React.useCallback(() => {
+    navigate('./create');
+  }, []);
+
+  const editUser = React.useCallback( (id: string) => {
+    navigate(`./${id}`);
+  }, []);
 
   const getUsers = async () => {
     try {
@@ -45,32 +53,6 @@ function UserList() {
       return [];
     }
   }
-
-  const deleteUser = async (id: string) => {
-    try {
-      const { request } = await http.delete<User>(`/api/user/${id}`);
-
-      setUsers(users.filter(user => user.id !== id));
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const target = event.currentTarget
-    const formData = new FormData(target);
-    const user = {
-      firstName: formData.get('first-name') as string,
-      lastName: formData.get('last-name') as string,
-    };
-    await createUser(user);
-    target.reset();
-  }
-
-  const editUser = (id: string) => {
-    navigate(`./${id}`);
-  };
 
   return (
     <div>
@@ -106,24 +88,11 @@ function UserList() {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <div className="mt-2 flex justify-around">
+        <Button onClick={createUser} variant="outlined">Create User</Button>
+      </div>
     </div>
-    // <div className="">
-    //   <form onSubmit={handleSubmit}>
-    //     <input name="first-name" required/>
-    //     <input name="last-name" required/>
-    //     <button type="submit">Create User</button>
-    //   </form>
-    //
-    //   <ul>
-    //     {users.map(user => (
-    //       <li key={user.id}>
-    //         {user.firstName} {user.lastName}
-    //         <button onClick={() => deleteUser(user.id)}>Delete</button>
-    //         {/*<button onClick={() => updateUser(user.id, { id: user.id, name: 'Updated User' })}>Update</button>*/}
-    //       </li>
-    //     ))}
-    //   </ul>
-    // </div>
   )
 }
 

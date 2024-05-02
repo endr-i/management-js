@@ -1,12 +1,14 @@
 import React from 'react';
-import PageLayout from '../../../component/layout/page';
+import UserForm from '../../../component/user/user-form';
+import { useParams } from 'react-router-dom';
+
 
 const User: React.FC = () => {
-  console.log('user')
+  const params = useParams();
 
   return (
     <div>
-      UserComponent
+      <UserForm id={params.id}/>
     </div>
   );
 };
