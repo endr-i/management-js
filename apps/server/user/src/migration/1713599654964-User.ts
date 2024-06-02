@@ -9,6 +9,7 @@ export class User1713599654964 implements MigrationInterface {
             "last_name" character varying NOT NULL,
             "is_active" boolean NOT NULL DEFAULT true,
             "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+            "role" integer NOT NULL DEFAULT 1,
             CONSTRAINT "PK_user_id" PRIMARY KEY ("id")
         )`);
   }
